@@ -1,4 +1,4 @@
-from ...algos.egrl.learner import Learner
+from algos.egrl.learner import Learner
 
 
 def initialize_portfolio(portfolio, args, genealogy, portfolio_id, model_constructor):

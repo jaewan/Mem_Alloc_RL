@@ -2,7 +2,7 @@ import os, sys
 import torch, math, numpy as np
 import torch.nn as nn
 import torch.nn.functional as F
-from models.gnn.hill_graph_unet import HillGraphUNet
+from models.hill_graph_unet import HillGraphUNet
 from collections import OrderedDict
 from torch_geometric.utils import to_undirected
 import torch_geometric as tg
@@ -223,7 +223,7 @@ class DuelingCritic(nn.Module):
         return q1, q2, None
 
 
-class BoltzmanChromosome():
+class BoltzmannChromosome():
     """
     Implements actor model.
     """

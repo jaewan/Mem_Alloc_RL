@@ -1,3 +1,4 @@
+
 import numpy as np, os, time, random, torch, sys
 from algos.egrl.neuroevolution import MixedSSNE
 from core import utils
@@ -6,7 +7,7 @@ from algos.egrl.portfolio import initialize_portfolio
 from torch.multiprocessing import Process, Pipe, Manager
 import threading
 from core.buffer import Buffer
-from algos.egrl.genealogy import Genealogy
+from algos.ga.genealogy import Genealogy
 import copy
 from models.models import BoltzmannChromosome
 
