@@ -1,7 +1,7 @@
 import os
 
 class Parameters:
-    def __init__(self, parser, unused, algo):
+    def __init__(self, parser, algo):
         """Parameter class stores all parameters for policy gradient
 
         Parameters:
@@ -14,28 +14,14 @@ class Parameters:
 
         #Env args
         self.env_name = vars(parser.parse_args())['env']
-        self.config = vars(parser.parse_args())['config']
-        self.is_cerl = vars(parser.parse_args())['XXXX-1']
-        self.wl = vars(parser.parse_args())['train_workloads'] + '_test_' + vars(parser.parse_args())['test_workloads']
-        self.objective_function = vars(parser.parse_args())['objective_function']
-        self.max_DD = vars(parser.parse_args())['max_DD']
-        self.agent_name = vars(parser.parse_args())['agent']
-        self.load_ckpt = vars(parser.parse_args())['load_ckpt']
-        #self.ckpt_path = vars(parser.parse_args())['ckpt_path']
-        #if not os.path.exists(self.ckpt_path): os.makedirs(self.ckpt_path)
         self.use_mp = vars(parser.parse_args())['use_mp']
         self.random_baseline = vars(parser.parse_args())['random_baseline']
 
-
-
         self.algo = algo
-        self.total_steps = int(vars(parser.parse_args())['total_steps'] * 1000000)
         self.gradperstep = vars(parser.parse_args())['gradperstep']
         self.ratio = vars(parser.parse_args())['boltzman_ratio']
 
-
         self.savetag = vars(parser.parse_args())['savetag']
-        self.seed = vars(parser.parse_args())['seed']
         self.gpu = vars(parser.parse_args())['gpu']
         self.batch_size = vars(parser.parse_args())['batchsize']
         self.rollout_size = vars(parser.parse_args())['rollsize']
@@ -84,15 +70,11 @@ class Parameters:
         self.models_folder = self.savefolder + '/Models/'
         if not os.path.exists(self.models_folder): os.makedirs(self.models_folder)
 
-        self.savetag += str(self.config)
         self.savetag += '_' + str(self.agent_name)
-        if self.agent_name == 'XXXX-1':
-            self.savetag += '_' + str(algo)
-        self.savetag += '_seed' + str(self.seed)
+        self.savetag += '_' + str(algo)
         self.savetag += '_roll' + str(self.rollout_size)
         self.savetag += '_pop' + str(self.pop_size)
         #self.savetag += '_portfolio' + str(self.portfolio_id)
-        self.savetag += '_wl' + str(self.wl)
         #self.savetag += '_maxDD' + str(self.max_DD)
         self.savetag += '_bratio' + str(self.ratio)
         self.savetag += '_' + self.objective_function
