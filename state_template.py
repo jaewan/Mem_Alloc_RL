@@ -3,7 +3,7 @@ import pandas as pd
 from torch_geometric.data import InMemoryDataset, Data
 import torch_geometric.transforms as T
 
-class State_template(InMemoryDataset):
+class State_Template(InMemoryDataset):
     def __init__(self, transform = None):
         super(State_template, self).__init__('.', transform, None, None, args)
 
