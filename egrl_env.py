@@ -3,14 +3,17 @@ from gym import Env
 
 import numpy
 
-class EGRL_ENV(Env):
+class egrl_env(Env):
     def __init__(self, state_num, 
                         steps_per_episode = 1, 
                         args=None,
                         override_reward=None,
-                        action_size):
+                        action_size,
+                        observation_size):
         self.args.args
-        self.action_space = spaces.Discrete(action_size)
+        act_list = [2]*action_size
+        self.action_space = spaces.MultiDiscrete(act_list)
+        self.observation_space = spaces.Box(shape = (observation_size, 9))
 
 
     def reset(self):
