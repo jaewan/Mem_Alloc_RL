@@ -135,8 +135,8 @@ class HillGraphUNet(torch.nn.Module):
         self.hidden_channels = hidden_channels
         self.out_channels = out_channels
         self.depth = depth
-        self.undirected_graphs = params['undirected_graphs']
-        self.n_attention_heads = params['n_attention_heads']
+        self.undirected_graphs = False;#params['undirected_graphs']
+        self.n_attention_heads = 0#params['n_attention_heads']
         #self.attention_concat = params['attention_concat']
         self.pool_ratios = repeat(pool_ratios, depth)
         self.act = act

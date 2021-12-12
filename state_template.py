@@ -1,11 +1,12 @@
 import torch
+import numpy as np
 import pandas as pd
 from torch_geometric.data import InMemoryDataset, Data
 import torch_geometric.transforms as T
 
 class State_Template(InMemoryDataset):
-    def __init__(self, transform = None):
-        super(State_template, self).__init__('.', transform, None, None, args)
+    def __init__(self, args=None, transform = None):
+        super(State_Template, self).__init__('.', transform, None, None)
 
         df = pd.read_csv('ResNet50_graph.csv')
 
@@ -16,6 +17,8 @@ class State_Template(InMemoryDataset):
         self.args = args
 
         self.state_template = Data(edge_index = edge_index)
+
+        self.x = torch.from_numpy(features)
 
         self.state_template.x = features
 

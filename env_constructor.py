@@ -1,6 +1,7 @@
 from egrl_env import EGRL_ENV
+from gym import Env
 
-class env_constructor(Env):
+class ENV_CONSTRUCTOR(Env):
     def __init__(self):
         return
 

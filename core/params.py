@@ -70,14 +70,12 @@ class Parameters:
         self.models_folder = self.savefolder + '/Models/'
         if not os.path.exists(self.models_folder): os.makedirs(self.models_folder)
 
-        self.savetag += '_' + str(self.agent_name)
         self.savetag += '_' + str(algo)
         self.savetag += '_roll' + str(self.rollout_size)
         self.savetag += '_pop' + str(self.pop_size)
         #self.savetag += '_portfolio' + str(self.portfolio_id)
         #self.savetag += '_maxDD' + str(self.max_DD)
         self.savetag += '_bratio' + str(self.ratio)
-        self.savetag += '_' + self.objective_function
         self.savetag += '_randomBaseline' if self.random_baseline else ''
 
         self.ckpt_folder = self.savefolder+'ckpts/'+self.savetag+'/'
