@@ -11,14 +11,16 @@ class Action_Space():
                    self._range[row['head_names']] = 1
                else:
                    self._range[row['head_names']] = range
+               #self._range[row['head_names']] = range
        self.head_names = self._range.keys()
+       self._num_heads = len(self.head_names)
 
     def head_names(self):
 	#return list of nodes
         return self.head_names
 
     def _num_head(self):
-        return len(self.head_names)
+        return self._num_heads
 
     def name2index(self, action, option):
         return 0

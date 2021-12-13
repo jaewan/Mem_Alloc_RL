@@ -26,8 +26,6 @@ class EGRL_ENV(Env):
         return st
 
     def step(self, action):
-        print(type(action))
-        print((action))
         reward = 1
         st = State_Template(self.args)
         obs = st.state_template

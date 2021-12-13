@@ -59,6 +59,9 @@ def rollout_worker(id, type, task_pipe, result_pipe, data_bucket, model_bucket, 
                 action = net.clean_action(state)
 
 
+            print(action['ofm_allocation'])
+            print("===========================")
+            quit()
             # for name, item in action.items():
             #     print(type, name, utils.to_numpy(item).shape)
 

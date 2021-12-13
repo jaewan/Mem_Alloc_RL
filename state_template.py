@@ -16,11 +16,11 @@ class State_Template(InMemoryDataset):
 
         self.args = args
 
-        self.state_template = Data(edge_index = edge_index)
+        self.state_template = Data(edge_index = self.edge_index)
 
-        self.x = torch.from_numpy(features)
+        self.x = torch.from_numpy(self.features)
 
-        self.state_template.x = features
+        self.state_template.x = self.features
 
         self.state_template.batch = self.args.batch_size
 
