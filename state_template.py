@@ -24,6 +24,8 @@ class State_Template(InMemoryDataset):
 
         self.state_template.batch = self.args.batch_size
 
+        self.batch = self.args.batch_size
+
 
     def _download(self):
         return
@@ -43,7 +45,7 @@ class State_Template(InMemoryDataset):
             current = df['Name'][i]
             a = df['Connectivity'][i]
             x = np.append(x, [[current, a]], axis = 0)
-            if not pd.isnull(df['Connectivity2'][i]):
+            if not df['Connectivity2'][i] == 0:
                 b = df['Connectivity2'][i]
                 x = np.append(x, [[current, b]], axis = 0)
         return x
@@ -53,7 +55,8 @@ class State_Template(InMemoryDataset):
         x = np.empty((0,9))
         for i in range(N):
             dummy_feature = self.opid(df.OPID[i])
-            dummy_feature.append(df.weight_size[i]) # number_of_weight_parameter
+            # dummy_feature.append(df.weight_size[i]) # number_of_weight_parameter #TODO Not Implemented,
+            dummy_feature.append(df.ofm_allocation[i] + df.weights_allocation[i]) #TODO so replaced with this one, temporarily
             ifmx = df.ifmx[i]
             ifmy = df.ifmy[i]
             ifmz = df.ifmz[i]
