@@ -1,4 +1,3 @@
-
 import numpy as np, os, time, random, torch, sys
 from algos.egrl.neuroevolution import MixedSSNE
 from core import utils
@@ -308,6 +307,7 @@ class EGRL_Trainer:
 			None
 
 
+		'''
 		############################# GENERALIZATION EXPERIMENTS ########################
 		_, resnet50_score, _, resnet50_speedup, _, _ = rollout_function(0, 'evo', gen_champ, self.test_envs[0], store_data=False)
 		_, resnet101_score, _, resnet101_speedup, _, _ = rollout_function(0, 'evo', gen_champ, self.test_envs[1], store_data=False)
@@ -326,6 +326,7 @@ class EGRL_Trainer:
 			self.bert_frames_tracker.update([bert_score, bert_speedup], self.total_frames)
 
 		############################# GENERALIZATION EXPERIMENTS ########################
+		'''
 
 
 

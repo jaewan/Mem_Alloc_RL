@@ -8,11 +8,11 @@ class State_Template(InMemoryDataset):
     def __init__(self, args=None, transform = None):
         super(State_Template, self).__init__('.', transform, None, None)
 
-        df = pd.read_csv('ResNet50_graph.csv')
+        df = pd.read_csv('ResNet101_graph.csv')
 
-        edge_index = torch.from_numpy(self.index_generator(df))
+        self.edge_index = torch.from_numpy(self.index_generator(df))
 
-        features = self.feature_generator(df)
+        self.features = self.feature_generator(df)
 
         self.args = args
 

@@ -301,7 +301,6 @@ class BoltzmannChromosome():
             self.dist[action_name] = dist
             i = i+1
 
-        quit()
         minTemp = 10000; maxTemp = 0.0; meanTemp = []
         for action_name, _ in self.temperature.items():
             self.temperature[action_name] = np.clip(self.temperature[action_name], 0.1, 10.0)
