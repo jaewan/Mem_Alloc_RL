@@ -7,12 +7,12 @@ class Model_Constructor:
 		#self.policy_string = policy_string
 		self.state_dim = observation_space.shape[0]
 		self.action_dim = action_space
-		state = env.reset()
+		#state = env.reset()
 		self.num_nodes = action_space._num_head()
 
 	def make_model(self, policy_string):
 		if policy_string == 'GumbelPolicy':
-			return model.GumbelPolicy(self.state_dim, self.action_dim, -1)
+			return model.GumbelPolicy(self.state_dim, self.action_dim)
 		if policy_string =='DuelingCritic':
 			return model.DuelingCritic(self.state_dim, self.action_dim)
 		else:

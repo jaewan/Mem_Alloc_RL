@@ -10,19 +10,19 @@ class Learner():
 		self.args = args
 
 		if args.algo == 'td3':
-			from egrl.algos.td3.td3 import TD3
+			from algos.td3.td3 import TD3
 			self.algo = TD3(model_constructor, actor_lr=args.actor_lr, critic_lr=args.critic_lr, gamma=gamma, tau=args.tau, polciy_noise=0.1, policy_noise_clip=0.2, policy_ups_freq=2)
 
 		elif args.algo == 'ddqn':
-			from egrl.algos.ddqn.ddqn import DDQN
+			from algos.ddqn.ddqn import DDQN
 			self.algo = DDQN(args, model_constructor, gamma)
 
 		elif args.algo == 'sac':
-			from egrl.algos.sac.sac import SAC
+			from algos.sac.sac import SAC
 			self.algo = SAC(args, model_constructor, gamma)
 
 		elif args.algo == 'sac_discrete':
-			from egrl.algos.sac_discrete.sac_discrete import SAC_Discrete
+			from algos.sac_discrete.sac_discrete import SAC_Discrete
 			self.algo = SAC_Discrete(args, model_constructor, gamma)
 
 		else:

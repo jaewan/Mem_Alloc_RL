@@ -100,14 +100,14 @@ class EGRL_Trainer:
 			data_bucket = self.data_bucket if args.rollout_size > 0 else None #If Strictly Evo - don;t store data
 			self.evo_task_pipes = [Pipe() for _ in range(args.pop_size)]
 			self.evo_result_pipes = [Pipe() for _ in range(args.pop_size)]
-			self.evo_workers = [Process(target=rollout_worker, args=(id, 'evo', self.evo_task_pipes[id][1], self.evo_result_pipes[id][0], data_bucket, self.population, env_constructor)) for id in range(args.pop_size)]
+			self.evo_workers = [Process(target=rollout_worker, args=(id, 'evo', self.evo_task_pipes[id][1], self.evo_result_pipes[id][0], data_bucket, self.population, self.env_constructor)) for id in range(args.pop_size)]
 			for worker in self.evo_workers: worker.start()
 
 
 			#Learner rollout workers
 			self.task_pipes = [Pipe() for _ in range(args.rollout_size)]
 			self.result_pipes = [Pipe() for _ in range(args.rollout_size)]
-			self.workers = [Process(target=rollout_worker, args=(id, 'pg', self.task_pipes[id][1], self.result_pipes[id][0], data_bucket, self.rollout_bucket, env_constructor)) for id in range(args.rollout_size)]
+			self.workers = [Process(target=rollout_worker, args=(id, 'pg', self.task_pipes[id][1], self.result_pipes[id][0], data_bucket, self.rollout_bucket, self.env_constructor)) for id in range(args.rollout_size)]
 			for worker in self.workers: worker.start()
 
 

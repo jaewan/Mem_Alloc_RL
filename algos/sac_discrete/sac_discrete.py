@@ -2,7 +2,7 @@ import os
 import torch
 import torch.nn.functional as F
 from torch.optim import Adam
-from ...core.utils import soft_update, hard_update, batch_to_cuda
+from core.utils import soft_update, hard_update, batch_to_cuda
 from torch_geometric.data.data import Data as hilltop_gnn_graph_dtype
 from torch_geometric.data.batch import Batch as hilltop_gnn_batch
 from torch.utils.tensorboard import SummaryWriter

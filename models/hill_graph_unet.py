@@ -141,7 +141,7 @@ class HillGraphUNet(torch.nn.Module):
         self.pool_ratios = repeat(pool_ratios, depth)
         self.act = act
         self.sum_res = sum_res
-        self.use_batchnorm = params['use_batchnorm']
+        self.use_batchnorm = params.get('use_batchnorm', True)
         channels = hidden_channels
 
         self.down_convs = torch.nn.ModuleList()
@@ -149,9 +149,11 @@ class HillGraphUNet(torch.nn.Module):
         self.down_bn = torch.nn.ModuleList() # batch norm after each GCN block
 
         # select between GCNConv and GATConv (graph attention) and BidirectionalGraphConv
+        '''
         if params['bidirectional_graph_conv']:
             graph_conv = lambda in_c, out_c: BidirectionalGraphConv(in_c, out_c, n_attention_heads=self.n_attention_heads, concat=True)
-        elif self.n_attention_heads == 0:
+        '''
+        if self.n_attention_heads == 0:
             graph_conv = lambda in_c, out_c: GCNBlock(in_c, channels, out_c)
         else:
             # we divide out_c by n_attention_heads because GATConv output is

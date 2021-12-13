@@ -5,6 +5,8 @@ from gym import Env
 import numpy
 from state_template import State_Template
 
+import os
+
 class EGRL_ENV(Env):
     def __init__(self, state_num, 
                         action_size,

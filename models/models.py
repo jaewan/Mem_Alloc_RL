@@ -288,13 +288,20 @@ class BoltzmannChromosome():
         return self.sample()
 
     def normalize(self):
+        i = 0
         for action_name, dist in self.dist.items():
-            #dist = np.clip(dist, 0.00000001 ,0.999999)
+            dist = np.clip(dist, 0.00000001 ,0.999999)
+            '''
             dist -= np.min(dist)
-            if np.sum(dist) == 0: dist += 0.0001
+            if np.sum(dist) == 0:
+                dist = dist + 0.0001
+            dist -= np.min(dist)
+            '''
             dist = dist / dist.sum(axis=1, keepdims=True)
             self.dist[action_name] = dist
+            i = i+1
 
+        quit()
         minTemp = 10000; maxTemp = 0.0; meanTemp = []
         for action_name, _ in self.temperature.items():
             self.temperature[action_name] = np.clip(self.temperature[action_name], 0.1, 10.0)
