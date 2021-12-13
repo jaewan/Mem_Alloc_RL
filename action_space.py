@@ -1,12 +1,16 @@
 import csv
 
-class Action_Space(Object):
+class Action_Space():
     def __init__(self, csv_file):
        self.csv_file = csv_file
        self._range = {}
        with open(csv_file) as f:
            for row in csv.DictReader(f):
-               self._range[row['op_name']] = int(row['ofm_allocations']) + int(row['weights_allocations'])
+               range = int(row['ofm_allocation']) + int(row['weights_allocation'])
+               if range == 0:
+                   self._range[row['head_names']] = 1
+               else:
+                   self._range[row['head_names']] = range
        self.head_names = self._range.keys()
 
     def head_names(self):
@@ -16,5 +20,5 @@ class Action_Space(Object):
     def _num_head(self):
         return len(self.head_names)
 
-    def name2index(self, action, option)
+    def name2index(self, action, option):
         return 0

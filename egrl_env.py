@@ -9,20 +9,18 @@ class EGRL_ENV(Env):
     def __init__(self, state_num, 
                         action_size,
                         observation_size,
+                        action_space,
                         steps_per_episode = 1, 
                         args=None,
                         override_reward=None):
         self.args=args
-        self.env = %TODO
         act_list = [2]*action_size
-        self.action_space = spaces.MultiDiscrete(act_list)
+        self.action_space = action_space
         self.observation_space = spaces.Box(high=float('inf'), low=0, shape = (observation_size, 9))
-	self.reset()
 
     def reset(self):
         print('Env reset')
-	st = State_Template(self.args)	
-
+        st = State_Template(self.args)	
         return st
 
     def step(self, action):

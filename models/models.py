@@ -241,10 +241,7 @@ class BoltzmannChromosome():
         self.fitness_stats = {'speedup':0, 'score':0, 'shaped': []}
         self.temperature_stats = {'min':None, 'max':None, 'mean':None}
 
-
-
         for action_name, range in self.action_space._range.items():
-            #print(observation_space, range)
             self.dist[action_name] = np.random.uniform(0,1, (observation_space, range))
             self.temperature[action_name] = np.random.uniform(0.1, 10.0, (observation_space, 1))
         self.normalize()
