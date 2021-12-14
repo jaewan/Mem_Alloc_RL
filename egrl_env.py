@@ -21,7 +21,7 @@ class EGRL_ENV(Env):
         self.observation_space = spaces.Box(high=float('inf'), low=0, shape = (observation_size, 9))
 
     def reset(self):
-        print('Env reset')
+        #print('Env reset')
         st = State_Template(self.args)	
         return st
 

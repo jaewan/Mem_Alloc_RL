@@ -1,7 +1,8 @@
 import torch
 import numpy as np
 import pandas as pd
-from torch_geometric.data import InMemoryDataset, Data
+from torch_geometric.data import InMemoryDataset, Data, Batch
+from torch.utils.data import DataLoader
 import torch_geometric.transforms as T
 
 class State_Template(InMemoryDataset):
@@ -9,10 +10,13 @@ class State_Template(InMemoryDataset):
         super(State_Template, self).__init__('.', transform, None, None)
 
         df = pd.read_csv('ResNet101_graph.csv')
+        self.num_nodes = df.shape[0]
 
         self.edge_index = torch.from_numpy(self.index_generator(df).astype(dtype=np.longlong))
 
-        self.features = self.feature_generator(df)
+        self.edge_index = self.edge_index.t().contiguous()
+
+        self.features = self.feature_generator(df).astype(dtype=np.float32)
 
         self.args = args
 
@@ -22,9 +26,9 @@ class State_Template(InMemoryDataset):
 
         self.state_template.x = torch.from_numpy(self.features)
 
-        self.state_template.batch = self.args.batch_size
+        self.state_template.batch = torch.zeros(self.args.batch_size, dtype=torch.int64)
 
-        self.batch = self.args.batch_size
+        self.batch = torch.zeros(self.args.batch_size, dtype=torch.int64)
 
 
     def _download(self):

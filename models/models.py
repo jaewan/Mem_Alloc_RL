@@ -75,7 +75,7 @@ class GumbelPolicy(nn.Module):
         x = torch.tanh(x)
 
 
-        if self.params['agent'] == 'XXXX-1' or self.params['agent'] == 'sac_discrete':
+        if  self.params['agent'] == 'sac_discrete':
             logits = {}
 
             for action_name, head in self.action_heads.items():
@@ -201,13 +201,16 @@ class DuelingCritic(nn.Module):
         """
         x, edge_index, batch = state.x, state.edge_index, state.batch
         # for keys, values in action.items():
-        #     print(keys, values.shape)
+        #   
+	#  print(keys, values.shape)
         # print('x', x.shape)
         # Put action into state
         for head in self.action_space.head_names():
             x = torch.cat([x, action[head]], axis=1)
 
         # Compute graph embeddings
+
+        i
         x = self.gnn(x, edge_index, batch)
         x = tg.nn.global_max_pool(x, batch)
 
@@ -252,7 +255,10 @@ class BoltzmannChromosome():
     def sample(self):
         logits = {}
 
+        i = 0
         for action_name, dist in self.dist.items():
+            print(i, action_name, dist.shape, self.temperature[action_name].shape)
+            i=i+1
             preds = np.exp(dist / self.temperature[action_name])
             preds = preds / preds.sum(axis=1, keepdims=True)# + self.epsilon
             action = [np.random.choice(range(len(row_pred)), p=row_pred) for row_pred in preds]

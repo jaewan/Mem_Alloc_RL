@@ -16,6 +16,7 @@ class Parameters:
         self.env_name = vars(parser.parse_args())['env']
         self.use_mp = vars(parser.parse_args())['use_mp']
         self.random_baseline = vars(parser.parse_args())['random_baseline']
+        self.agent = vars(parser.parse_args())['agent']
 
         self.algo = algo
         self.gradperstep = vars(parser.parse_args())['gradperstep']
