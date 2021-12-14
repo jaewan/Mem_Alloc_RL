@@ -4,16 +4,22 @@ class Action_Space():
     def __init__(self, csv_file):
        self.csv_file = csv_file
        self._range = {}
+       max_ofm_num = 0
+       max_weights_num = 0
+       self.head_names = []
+       self._num_heads = 0
        with open(csv_file) as f:
            for row in csv.DictReader(f):
-               range = int(row['ofm_allocation']) + int(row['weights_allocation'])
-               if range == 0:
-                   self._range[row['head_names']] = 1
-               else:
-                   self._range[row['head_names']] = range
-               #self._range[row['head_names']] = range
-       self.head_names = self._range.keys()
-       self._num_heads = len(self.head_names)
+               self.head_names.append(row['head_names'])
+               self._num_heads = self._num_heads + 1
+               if max_ofm_num < int(row['ofm_allocation']):
+                   max_ofm_num =  int(row['ofm_allocation'])
+               if max_weights_num < int(row['weights_allocation']):
+                   max_weights_num =  int(row['weights_allocation'])
+
+       self._range['ofm_allocation'] = max_ofm_num
+       self._range['weights_allocation'] = max_weights_num
+
 
     def head_names(self):
 	#return list of nodes

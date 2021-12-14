@@ -140,6 +140,7 @@ def rollout_function(id, type, net, env, store_data):
         else:
             action = net.clean_action(state)
 
+        print(action)
         try:
             next_state, reward, done, info = env.step(action) #Simulate one step in environment
         except:

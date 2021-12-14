@@ -290,13 +290,10 @@ class BoltzmannChromosome():
     def normalize(self):
         i = 0
         for action_name, dist in self.dist.items():
-            dist = np.clip(dist, 0.00000001 ,0.999999)
-            '''
+            #dist = np.clip(dist, 0.00000001 ,0.999999)
             dist -= np.min(dist)
             if np.sum(dist) == 0:
                 dist = dist + 0.0001
-            dist -= np.min(dist)
-            '''
             dist = dist / dist.sum(axis=1, keepdims=True)
             self.dist[action_name] = dist
             i = i+1

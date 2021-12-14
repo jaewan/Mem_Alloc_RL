@@ -20,7 +20,7 @@ class State_Template(InMemoryDataset):
 
         self.x = torch.from_numpy(self.features)
 
-        self.state_template.x = self.features
+        self.state_template.x = torch.from_numpy(self.features)
 
         self.state_template.batch = self.args.batch_size
 
