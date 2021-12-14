@@ -1,4 +1,4 @@
-op_name,Name,Connectivity,Connectivity2,ofm_allocation,weight_allocation,head_names,OPID,ifmx,ifmy,ifmz,ofmx,ofmy,ofmz
+op_name,Name,Connectivity,Connectivity2,ofm_allocation,weights_allocation,head_names,OPID,ifmx,ifmy,ifmz,ofmx,ofmy,ofmz
 conv2d,0,1,,1,3,conv2d_0,100000,3,224,224,64,112,112
 bn2d,1,2,,5,3,bn2d_1,010000,64,112,112,64,112,112
 relu,2,3,,0,0,relu_2,001000,64,112,112,64,112,112
