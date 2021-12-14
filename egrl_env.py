@@ -26,12 +26,10 @@ class EGRL_ENV(Env):
         return st
 
     def step(self, action):
-        reward = 1
-        st = State_Template(self.args)
-        obs = st.state_template
 
-        done = False
+        obs = action
+        done = True
         info = {}
         info['dummy'] = None
 
-        return obs, reward, done, info
+        return obs, np.array([1]), done, info

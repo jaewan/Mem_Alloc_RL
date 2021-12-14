@@ -249,11 +249,7 @@ class BoltzmannChromosome():
         self.epsilon = 1e-6  # to avoid taking the log of zero
 
 
-
-
     def sample(self):
-
-
         logits = {}
 
         for action_name, dist in self.dist.items():

@@ -214,6 +214,9 @@ class HillGraphUNet(torch.nn.Module):
         edge_weight = x.new_ones(edge_index.size(1))
         if self.n_attention_heads == 0:
             x = x.type(torch.FloatTensor)
+            print(x.shape)
+            print(edge_weight.shape)
+            print(edge_weight.shape)
             x = self.down_convs[0](x, edge_index, edge_weight)
         else:
             x = x.type(torch.FloatTensor)

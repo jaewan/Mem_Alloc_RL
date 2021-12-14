@@ -10,7 +10,7 @@ class State_Template(InMemoryDataset):
 
         df = pd.read_csv('ResNet101_graph.csv')
 
-        self.edge_index = torch.from_numpy(self.index_generator(df))
+        self.edge_index = torch.from_numpy(self.index_generator(df).astype(dtype=np.longlong))
 
         self.features = self.feature_generator(df)
 
