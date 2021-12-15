@@ -53,7 +53,7 @@ observation_space = np.zeros((action_size,9))
 action_space =  action_space.Action_Space(vars(parser.parse_args())['csv_file'])
 state_template = generator(args = args)
 env = egrl_env.EGRL_ENV(state_num = FEATURE_DIM, action_space=action_space,action_size=action_size, state_template = state_template, observation_size=RESNET101_SIZE, args=args)
-env_constructor = env_constructor.ENV_CONSTRUCTOR(state_num = FEATURE_DIM, action_space=action_space,action_size=action_size, observation_size=RESNET101_SIZE, args=args)
+env_constructor = env_constructor.ENV_CONSTRUCTOR(state_num = FEATURE_DIM, action_space=action_space,action_size=action_size, state_template = state_template, observation_size=RESNET101_SIZE, args=args)
 platform = 'wpa'
 model_constructor = model_constructor.Model_Constructor(args, observation_space, action_space, env, params=vars(parser.parse_args()))
 test_envs = env
