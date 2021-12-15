@@ -13,7 +13,7 @@ def generator(args=None, transform = None):
 
     edge_index = edge_index.t().contiguous()
 
-    features = feature_generator(df)
+    features = torch.from_numpy(feature_generator(df))
 
     single_graph = Data(x = features, edge_index = edge_index, num_nodes = df.shape[0])
 
