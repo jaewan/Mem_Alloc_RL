@@ -246,7 +246,7 @@ class BoltzmannChromosome():
 
         for action_name, range in self.action_space._range.items():
             self.dist[action_name] = np.random.uniform(0,1, (observation_space, range))
-            self.temperature[action_name] = np.random.uniform(0.1, 10.0, (observation_space, 1))
+            self.temperature[action_name] = np.random.uniform(1, 10.0, (observation_space, 1))#originally [1,10]
         self.normalize()
 
         self.epsilon = 1e-6  # to avoid taking the log of zero
@@ -257,8 +257,11 @@ class BoltzmannChromosome():
 
         i = 0
         for action_name, dist in self.dist.items():
-            print(i, action_name, dist.shape, self.temperature[action_name].shape)
-            i=i+1
+            #print(i, action_name, dist.shape, self.temperature[action_name].shape)
+            if np.isnan(dist).any():
+                print(i, dist)
+            if (self.temperature[action_name]==0).any():
+                print(self.temperature[action_name])
             preds = np.exp(dist / self.temperature[action_name])
             preds = preds / preds.sum(axis=1, keepdims=True)# + self.epsilon
             action = [np.random.choice(range(len(row_pred)), p=row_pred) for row_pred in preds]
@@ -302,7 +305,7 @@ class BoltzmannChromosome():
 
         minTemp = 10000; maxTemp = 0.0; meanTemp = []
         for action_name, _ in self.temperature.items():
-            self.temperature[action_name] = np.clip(self.temperature[action_name], 0.1, 10.0)
+            self.temperature[action_name] = np.clip(self.temperature[action_name], 1, 10.0)
             if np.min(self.temperature[action_name]) < minTemp: minTemp = np.min(self.temperature[action_name])
             if np.max(self.temperature[action_name]) > maxTemp: maxTemp = np.max(self.temperature[action_name])
             meanTemp.append(np.mean(self.temperature[action_name]))

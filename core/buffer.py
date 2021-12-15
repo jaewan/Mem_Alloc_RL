@@ -58,6 +58,7 @@ class Buffer():
 
 
             action_list = [torch.Tensor(a).long().to(device=self.device) for a in exp[4]]
+            print(self.action_space.head_names())
             for i, action_name in enumerate(self.action_space.head_names()):
                 ns[action_name] = action_list[i]
 
@@ -100,7 +101,7 @@ class Buffer():
 
 
             action_list = [torch.Tensor(a).long().to(device=self.device) for a in exp[4]]
-            for i, action_name in enumerate(self.action_space.head_names()):
+            for i, action_name in enumerate(self.action_space.head_names):
                 ns[action_name] = action_list[i]
 
             s = s.to_data_list()[0]

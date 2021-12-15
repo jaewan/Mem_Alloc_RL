@@ -158,6 +158,7 @@ def rollout_function(id, type, net, env, store_data):
 
         # sum the graph-wise reward to a scalar,
         reward_scalar = reward.sum().item()
+        print(reward_scalar)
         if math.isnan(reward_scalar) or math.isinf(reward_scalar):
             reward_scalar = -2.0
         all_reward.append(reward_scalar)
@@ -170,6 +171,9 @@ def rollout_function(id, type, net, env, store_data):
             for name, item in action.items():
                 action_list.append(utils.to_numpy(item))
 
+            print(state.batch)
+            print(state.edge_index)
+            print(state.x)
             rollout_trajectory.append([utils.to_numpy(state.x), utils.to_numpy(state.edge_index), utils.to_numpy(state.batch),
                                        utils.to_numpy(next_state.x),
                                        action_list,

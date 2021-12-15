@@ -9,7 +9,7 @@ class Model_Constructor:
 		self.action_dim = action_space
 		#state = env.reset()
 		self.params = params
-		self.num_nodes = action_space._num_heads
+		self.num_nodes = observation_space.shape[0]
 
 	def make_model(self, policy_string):
 		if policy_string == 'GumbelPolicy':

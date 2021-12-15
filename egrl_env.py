@@ -2,8 +2,9 @@ import gym
 from gym import error, spaces
 from gym import Env
 
-import numpy
+import numpy as np 
 from state_template import State_Template
+import torch
 
 import os
 
@@ -22,14 +23,15 @@ class EGRL_ENV(Env):
 
     def reset(self):
         #print('Env reset')
-        st = State_Template(self.args)	
+        st = State_Template(self.args).state_template	
         return st
 
     def step(self, action):
 
-        obs = action
+        #action term needed 
+        obs = State_Template(self.args).state_template 
         done = True
         info = {}
         info['dummy'] = None
 
-        return obs, np.array([1]), done, info
+        return obs, torch.rand(1), done, info
