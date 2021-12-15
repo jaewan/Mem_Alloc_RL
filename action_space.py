@@ -4,7 +4,7 @@ class Action_Space():
     def __init__(self, csv_file):
        self.csv_file = csv_file
        self._range = {}
-       self.head_names = ['ofm_allocation','weights_allocation']
+       self.head_names_ = ['ofm_allocation','weights_allocation']
        self._num_heads = 2
        '''
        with open(csv_file) as f:
@@ -20,7 +20,7 @@ class Action_Space():
 
     def head_names(self):
 	#return list of nodes
-        return self.head_names
+        return self.head_names_
 
     def name2index(self, action, option):
         return 0

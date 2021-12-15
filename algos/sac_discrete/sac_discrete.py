@@ -79,8 +79,9 @@ class SAC_Discrete(object):
         state_batch = hilltop_gnn_batch.from_data_list(state_batch)
         next_state_batch = hilltop_gnn_batch.from_data_list(next_state_batch)
 
-        action_batch = {k: next_state_batch[k].to(self.device) for k in self.actor.action_space.head_names()}
+        action_batch = {k: next_state_batch.x[:,-i].to(self.device) for i,k in enumerate(self.actor.action_space.head_names())} #Joohwan
 
+        #print(action_batch['ofm_allocation'])
 
         reward_batch = torch.cat(reward_batch)
         reward_batch += 2.0
@@ -91,6 +92,7 @@ class SAC_Discrete(object):
 
         #Convert LongTensor Action to Categorical
         for action_name, range in self.actor.action_space._range.items():
+            #print(action_batch[action_name])
             action_batch[action_name] = torch.nn.functional.one_hot(action_batch[action_name].long(), num_classes=range).float().to(self.device)
             noise = torch.Tensor(action_batch[action_name].data.new(action_batch[action_name].size()).normal_(0, 0.2)).to(self.device)
             action_batch[action_name] += noise
@@ -200,3 +202,5 @@ class SAC_Discrete(object):
             self.policy.load_state_dict(torch.load(actor_path))
         if critic_path is not None:
             self.critic.load_state_dict(torch.load(critic_path))
+
+

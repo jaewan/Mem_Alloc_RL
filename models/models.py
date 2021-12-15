@@ -210,7 +210,6 @@ class DuelingCritic(nn.Module):
 
         # Compute graph embeddings
 
-        i
         x = self.gnn(x, edge_index, batch)
         x = tg.nn.global_max_pool(x, batch)
 

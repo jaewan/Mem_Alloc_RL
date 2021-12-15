@@ -23,13 +23,14 @@ class EGRL_ENV(Env):
 
     def reset(self):
         #print('Env reset')
-        st = State_Template(self.args).state_template	
-        return st
+        st = State_Template(self.args)	
+        return st.generator()
 
     def step(self, action):
 
         #action term needed 
-        obs = State_Template(self.args).state_template 
+        st = State_Template(self.args)
+        obs = st.generator()
         done = True
         info = {}
         info['dummy'] = None

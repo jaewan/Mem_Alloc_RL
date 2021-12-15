@@ -2,14 +2,15 @@ import models.models as model
 
 class Model_Constructor:
 	
-	def __init__(self, args, observation_space, action_space, env, params):
+	def __init__(self, args, observation_space, action_space, state_template, env, params):
 		self.args = args
 		#self.policy_string = policy_string
 		self.state_dim = observation_space.shape[1]
 		self.action_dim = action_space
 		#state = env.reset()
 		self.params = params
-		self.num_nodes = observation_space.shape[0]
+		#self.num_nodes = observation_space.shape[0]
+		self.num_nodes = (state_template.x).shape[0]
 
 	def make_model(self, policy_string):
 		if policy_string == 'GumbelPolicy':

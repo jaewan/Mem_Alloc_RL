@@ -28,7 +28,6 @@ class EGRL_Trainer:
 		self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu") if self.args.gpu else torch.device('cpu')
 
 		#Evolution
-		print(state_template)
 		dram_action = torch.ones((len(state_template.x), 2)) + 1
 		state_template.x = torch.cat([state_template.x, dram_action], axis=1)
 		self.evolver = MixedSSNE(self.args, state_template) #GA(self.args) if args.boltzman else SSNE(self.args)

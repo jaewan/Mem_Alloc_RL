@@ -20,22 +20,29 @@ class State_Template(InMemoryDataset):
 
         self.args = args
 
-        self.single_graph = Data(x = self.features, edge_index = self.edge_index, num_nodes = df.shape[0])
+        self.single_graph = Data(x = torch.from_numpy(self.features), edge_index = self.edge_index, num_nodes = df.shape[0])
 
-        #self.x = torch.from_numpy(self.features)
+        self.x = torch.from_numpy(self.features)
 
         #self.state_template.x = torch.from_numpy(self.features)
         self.state_template = Batch.from_data_list([self.single_graph]*self.args.batch_size)
 
         #self.state_template.batch = torch.zeros(self.args.batch_size, dtype=torch.int64)
-        #self.state_template.batch = Batch.from_data_list([self.state_template]*self.args.batch_size) 
+        self.batch_graph = Batch.from_data_list([self.state_template]*self.args.batch_size) 
 
         #self.batch = torch.zeros(self.args.batch_size, dtype=torch.int64)
         #self.batch = Batch.from_data_list([self.state_template]*self.args.batch_size)
 
-    def to_data_list(self):
-        return Data.to_data_list(self.state_template)
+    #def to_data_list(self):
+        #return Data.to_data_list(self.state_template)
 
+    def generator(self):
+        #return self.single_graph
+        return self.batch_graph
+        
+    def generator_single(self):
+        return self.single_graph
+        
     def _download(self):
         return
     
