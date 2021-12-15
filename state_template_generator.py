@@ -17,7 +17,8 @@ def generator(args=None, transform = None):
 
     single_graph = Data(x = features, edge_index = edge_index, num_nodes = df.shape[0])
 
-    state_template = Batch.from_data_list([single_graph]*args.batch_size)
+    # state_template = Batch.from_data_list([single_graph]*args.batch_size)
+    state_template = single_graph
 
     return state_template
 
