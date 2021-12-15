@@ -6,14 +6,14 @@ from torch.utils.data import DataLoader
 import torch_geometric.transforms as T
 
 
-def generator(self, args=None, transform = None):
+def generator(args=None, transform = None):
     df = pd.read_csv('ResNet101_graph.csv')
 
     edge_index = torch.from_numpy(index_generator(df).astype(dtype=np.longlong))
 
     edge_index = edge_index.t().contiguous()
 
-    features = self.feature_generator(df).astype(dtype=np.float32)
+    features = feature_generator(df).astype(dtype=np.float32)
 
     single_graph = Data(x = features, edge_index = edge_index, num_nodes = df.shape[0])
 
@@ -21,7 +21,7 @@ def generator(self, args=None, transform = None):
 
     return state_template
 
-def index_generator(self, df):
+def index_generator(df):
     N = df.shape[0]
 
     x = np.empty((0,2))
@@ -35,11 +35,11 @@ def index_generator(self, df):
             x = np.append(x, [[current, b]], axis = 0)
     return x
 
-def feature_generator(self, df):
+def feature_generator(df):
     N = df.shape[0]
     x = np.empty((0,9))
     for i in range(N):
-        dummy_feature = self.opid(df.OPID[i])
+        dummy_feature = opid(df.OPID[i])
         # dummy_feature.append(df.weight_size[i]) # number_of_weight_parameter #TODO Not Implemented,
         dummy_feature.append(df.ofm_allocation[i] + df.weights_allocation[i]) #TODO so replaced with this one, temporarily
         ifmx = df.ifmx[i]
@@ -66,7 +66,7 @@ def feature_generator(self, df):
         x = np.append(x, np.asarray(dummy_feature).reshape([-1,1]).transpose(), axis = 0)
     return x      
 
-def opid(self, OPID):
+def opid(OPID):
     if OPID == 100000:
         output = [1,0,0,0,0,0] # conv2d
     elif OPID == 10000:
