@@ -9,11 +9,11 @@ import torch_geometric.transforms as T
 def generator(args=None, transform = None):
     df = pd.read_csv('ResNet101_graph.csv')
 
-    edge_index = torch.from_numpy(index_generator(df).astype(dtype=np.longlong))
+    edge_index = torch.from_numpy(index_generator(df))
 
     edge_index = edge_index.t().contiguous()
 
-    features = feature_generator(df).astype(dtype=np.float32)
+    features = feature_generator(df)
 
     single_graph = Data(x = features, edge_index = edge_index, num_nodes = df.shape[0])
 
