@@ -79,7 +79,7 @@ class SAC_Discrete(object):
         state_batch = hilltop_gnn_batch.from_data_list(state_batch)
         next_state_batch = hilltop_gnn_batch.from_data_list(next_state_batch)
 
-        action_batch = {k: next_state_batch.x[:,-i].to(self.device) for i,k in enumerate(self.actor.action_space.head_names())} #Joohwan
+        action_batch = {k: next_state_batch.x[:,-2+i].to(self.device) for i,k in enumerate(self.actor.action_space.head_names())} #Joohwan
 
         #print(action_batch['ofm_allocation'])
 

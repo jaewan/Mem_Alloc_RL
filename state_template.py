@@ -19,6 +19,7 @@ class State_Template(InMemoryDataset):
         self.features = self.feature_generator(df).astype(dtype=np.float32)
 
         self.args = args
+        self.node_op_name = df.op_name
 
         self.single_graph = Data(x = torch.from_numpy(self.features), edge_index = self.edge_index, num_nodes = df.shape[0])
 
